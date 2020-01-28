@@ -1,0 +1,12 @@
+version: 2
+
+tasks:
+  build:
+    cmds:
+      - yarn tsc
+      - yarn generate-releases
+    dir: UseTaskfile
+  package:
+    cmds:
+      - yarn tfx extension create --manifest-globs ../vss-extension.json
+    dir: UseTaskfile

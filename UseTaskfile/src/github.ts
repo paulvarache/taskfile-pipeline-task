@@ -2,10 +2,23 @@ import * as tl from 'azure-pipelines-tool-lib/tool';
 import * as rp from 'request-promise-native';
 import * as semver from 'semver';
 import * as os from 'os';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const BASE = "https://api.github.com";
 
 const DEFAULT_HEADERS = { 'User-Agent': 'taskfile-pipeline-task' };
+
+
+let releases: IRelease[] = [];
+
+export function initCache() {
+    if (releases.length !== 0) {
+        return;
+    }
+    const contents = fs.readFileSync(path.join(__dirname, '../releases.json'), 'utf-8');
+    releases = JSON.parse(contents);
+}
 
 export interface IAsset {
     url: string;
@@ -31,6 +44,10 @@ export interface IRelease {
 export interface IMachineProfile {
     os: 'windows'|'darwin'|'linux';
     arch: '386'|'amd64';
+}
+
+export function getReleasesCache() {
+    return releases;
 }
 
 export async function getReleases(owner: string, repo: string): Promise<IRelease[]> {

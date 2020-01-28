@@ -8,13 +8,16 @@
   "license": "GPL-2.0-only",
   "private": false,
   "scripts": {
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "tfx": "tfx",
+    "generate-releases": "node ./dist/generate-releases.js"
   },
   "devDependencies": {
     "@types/node": "^13.5.0",
     "@types/q": "^1.5.2",
     "@types/request-promise-native": "^1.0.17",
     "@types/semver": "^7.1.0",
+    "tfx-cli": "^0.7.11",
     "typescript": "^3.7.5"
   },
   "dependencies": {

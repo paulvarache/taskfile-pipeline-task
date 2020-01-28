@@ -1,0 +1,18 @@
+trigger:
+- master
+- refs/tags/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: UseNode@1
+- task: UseTaskfile@0
+
+- script: yarn
+  workingDirectory: UseTaskfile
+  displayName: Install dependencies
+
+- script: task build
+  displayName: Build task

@@ -1,10 +1,25 @@
 import tl = require('azure-pipelines-task-lib/task');
-import { getReleases, findReleaseWithVersion, getMachineProfile, getAssetName, findAssetWithName, install } from './github';
+import { getReleases, findReleaseWithVersion, getMachineProfile, getAssetName, findAssetWithName, install, getReleasesCache, IRelease, initCache } from './github';
 
 const DEFAULT_VERSION = '2.8.0';
 const OWNER = 'go-task';
 const REPO = 'task';
 const BINARY_NAME = 'task';
+
+async function getRelease(version: string, noCache = false): Promise<IRelease> {
+    initCache();
+    // Get releases from github or the cache
+    let releases = noCache ? await getReleases(OWNER, REPO) : await Promise.resolve(getReleasesCache());
+    const release = findReleaseWithVersion(releases, version);
+    if (!release) {
+        if (noCache) {
+            throw new Error(`Could not find release for version '${version}'`);
+        }
+        // No release found for this version, but we haven't looked online, try again without the cache
+        return await getRelease(version, true);
+    }
+    return release;
+}
 
 async function run() {
     try {
@@ -12,11 +27,7 @@ async function run() {
         if (!inputVersion) {
             inputVersion = DEFAULT_VERSION;
         }
-        const releases = await getReleases(OWNER, REPO);
-        const release = findReleaseWithVersion(releases, inputVersion);
-        if (!release) {
-            throw new Error(`Could not find release for version '${inputVersion}'`);
-        }
+        const release = await getRelease(inputVersion);
         const p = getMachineProfile();
         const assetName = getAssetName(BINARY_NAME, p);
         const asset = findAssetWithName(release.assets, assetName);
