@@ -14,6 +14,20 @@ The extension can be found on the [Visual Studio Marketplace](https://marketplac
 
 The `UseTaskfile@0` task will download and add to the path a version of `task`.
 
+Usage:
+```yaml
+steps:
+- task: UseTaskfile@0
+```
+
+You can also specify a version:
+```yaml
+steps:
+- task: UseTaskfile@0
+  inputs:
+    version: 1.0
+```
+
 Due to the Github API rate limits and the limited range of IP the vmImages of Azure Pipelines use, using github to retrieve releases of `task` causes issues. This tool caches the list of release and uses this cache. If the version is not found in cache, it will fallback to using the github API.
 
 ## License
