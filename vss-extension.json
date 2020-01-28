@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "taskfile-pipeline-task",
+    "name": "Taskfile support for Azure pipelines",
+    "version": "0.0.2",
+    "publisher": "paulvarache",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Tools to integrate https://taskfile.dev with a pipeline",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "files": [
+        {
+            "path": "UseTaskfile"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "UseTaskfile",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "UseTaskfile"
+            }
+        }
+    ]
+}
