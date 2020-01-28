@@ -2,19 +2,43 @@
     "manifestVersion": 1,
     "id": "taskfile-pipeline-task",
     "name": "Taskfile support for Azure pipelines",
-    "version": "0.0.4",
+    "version": "0.0.7",
     "publisher": "paulvarache",
+    "public": true,
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],
     "description": "Tools to integrate https://taskfile.dev with a pipeline",
     "categories": [
         "Azure Pipelines"
     ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "links": {
+        "repository": {
+            "uri": "https://github.com/paulvarache/taskfile-pipeline-task"
+        },
+        "issues": {
+            "uri": "https://github.com/paulvarache/taskfile-pipeline-task/issues"
+        },
+        "support": {
+            "uri": "mailto:varache.paul@gmail.com"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/paulvarache/taskfile-pipeline-task"
+    },
     "icons": {
-        "default": "images/extension-icon.png"        
+        "default": "images/extension-icon.png"
     },
     "files": [
         {
