@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "taskfile-pipeline-task",
     "name": "Taskfile support for Azure pipelines",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "publisher": "paulvarache",
     "public": true,
     "targets": [
